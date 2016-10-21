@@ -8,5 +8,10 @@ package infix;
  *
  */
 public class infix {
-
+  private char[] eq;
+  
+  
+  infix(char[] eq){
+    
+  }
 }
