@@ -23,11 +23,25 @@ public class postfix {
         if(newEq[i].matches(operand)){
           stack.push(newEq[i]);
           opCounter++;
-        } else if (newEq[i].equals("+") || newEq[i].equals("*") || newEq[i].equals("/") || newEq[i].equals("-")){
+        } else if (newEq[i].equals("+")){
           int second = Integer.valueOf(stack.pop());
           int first = Integer.valueOf(stack.pop());
-          char operator = newEq[i].charAt(i);
-          total = Integer.valueOf(first)
+          stack.push(String.valueOf(first + second));
+          opCounter--;
+        } else if (newEq[i].equals("*")){
+          int second = Integer.valueOf(stack.pop());
+          int first = Integer.valueOf(stack.pop());
+          stack.push(String.valueOf(first * second));
+          opCounter--;
+        } else if (newEq[i].equals("/")){
+          int second = Integer.valueOf(stack.pop());
+          int first = Integer.valueOf(stack.pop());
+          stack.push(String.valueOf(first / second));
+          opCounter--;
+        } else if (newEq[i].equals("-")){
+          int second = Integer.valueOf(stack.pop());
+          int first = Integer.valueOf(stack.pop());
+          stack.push(String.valueOf(first - second));
           opCounter--;
         } else {
           System.out.println("Invalid input");
@@ -38,6 +52,6 @@ public class postfix {
         System.out.println("Invalid input");
         System.exit(0);
       } 
-      return total;
+      return Integer.valueOf(stack.pop());
     }
 }
