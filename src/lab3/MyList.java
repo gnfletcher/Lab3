@@ -1,7 +1,7 @@
 /**
  * 
  */
-package postfix;
+package lab3;
 
 /**
  * Interface for list data structures.

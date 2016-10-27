@@ -1,7 +1,7 @@
 /**
  * 
  */
-package postfix;
+package lab3;
 
 /**
  * Node object used as element of a linked list or circular linked list.

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package postfix;
+package lab3;
 
 /**
  * Implements MyList interface as an linked list.
@@ -73,9 +73,9 @@ public class MyLinkedList<T> implements MyList<T> {
     this.size++;
     return true;
   }
-  
+
   public boolean push(T object) {
-    if (head.getValue() == null) {
+    if (isEmpty()) {
       head = new MyNode<T>(object, null);
       tail = head;
     } else {
@@ -85,10 +85,15 @@ public class MyLinkedList<T> implements MyList<T> {
     this.size++;
     return true;
   }
-  
-  public T pop(){
+
+  public T pop() {
     MyNode<T> oldHead = (MyNode<T>) head;
-    head = head.getNext();
+    if (size < 1) {
+      head = null;
+    } else {
+      head = head.getNext();
+    }
+    this.size--;
     return (T) oldHead.getValue();
   }
 
@@ -274,7 +279,7 @@ public class MyLinkedList<T> implements MyList<T> {
     }
     return newArray;
   }
-  
+
   /**
    * Takes two elements at given indexes and exchanges their value.
    * 
@@ -318,7 +323,7 @@ public class MyLinkedList<T> implements MyList<T> {
     }
     return true;
   }
-  
+
   /**
    * Moves elements in list by given number of elements. Indexes can move in a positive or negative
    * direction.
@@ -350,6 +355,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
   /**
    * Retrieves head of list.
+   * 
    * @return node object of head.
    */
   public MyNode<T> getHead() {
@@ -359,6 +365,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
   /**
    * Retrieves tail of list.
+   * 
    * @return node object of tail.
    */
   public MyNode<T> getTail() {
@@ -367,6 +374,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
   /**
    * Sets head marker to given object.
+   * 
    * @param head node object
    */
   public void setHead(MyNode<T> head) {
@@ -375,6 +383,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
   /**
    * Sets tail marker to given object.
+   * 
    * @param tail node object
    */
   public void setTail(MyNode<T> tail) {
