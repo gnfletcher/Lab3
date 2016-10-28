@@ -10,38 +10,32 @@ import java.util.ArrayList;
  *
  */
 public class KnightsTour {
-
+  
   public KnightsTour(int boardSize, int x, int y) {
     ArrayList<OrderedPair> board = createBoard(boardSize);
     ArrayList<OrderedPair> usedMoves = new ArrayList<OrderedPair>();
-    move(new OrderedPair(x, y), board, usedMoves);
+    move(new OrderedPair(x, y), board, usedMoves, boardSize);
   }
 
   public void move(OrderedPair current, ArrayList<OrderedPair> newBoard,
-      ArrayList<OrderedPair> newUsedMoves) {
+      ArrayList<OrderedPair> newUsedMoves, int boardSize) {
     ArrayList<OrderedPair> board = newBoard;
     ArrayList<OrderedPair> usedMoves = newUsedMoves;
-    ArrayList<OrderedPair> legalMoves = getLegalMoves(current, board);
     if (board.isEmpty()) {
       System.out.println("Solution found!:");
-      printMoves(usedMoves);
-    } else if (!legalMoves.isEmpty()) {
-      System.out.println("Moves:");
-      for (OrderedPair newMove : legalMoves) {
-        System.out.println("(" + newMove.getX() + "," + newMove.getY() + ")" + "  ");
-      }
+      printMoves(usedMoves, boardSize);
+    } else {
+      ArrayList<OrderedPair> legalMoves = getLegalMoves(current, board);
       if (!legalMoves.isEmpty()) {
         for (OrderedPair newMove : legalMoves) {
-          System.out.println(board.remove(newMove));
-          for (OrderedPair boardSpace : board) {
-            System.out.println("(" + boardSpace.getX() + "," + boardSpace.getY() + ")" + "  ");
-          }
+          board.remove(newMove);
           usedMoves.add(newMove);
-          move(newMove, board, usedMoves);
+          move(newMove, board, usedMoves, boardSize);
         }
       }
     }
   }
+
 
   public ArrayList<OrderedPair> createBoard(int boardSize) {
     ArrayList<OrderedPair> board = new ArrayList<OrderedPair>();
@@ -53,7 +47,8 @@ public class KnightsTour {
     return board;
   }
 
-  public ArrayList<OrderedPair> getLegalMoves(OrderedPair current, ArrayList<OrderedPair> newBoard) {
+  public ArrayList<OrderedPair> getLegalMoves(OrderedPair current,
+      ArrayList<OrderedPair> newBoard) {
     ArrayList<OrderedPair> legalMoves = new ArrayList<OrderedPair>();
     ArrayList<OrderedPair> board = newBoard;
     OrderedPair testPair = new OrderedPair(current.getX() + 1, current.getY() + 2);
@@ -91,9 +86,19 @@ public class KnightsTour {
     return legalMoves;
   }
 
-  public void printMoves(ArrayList<OrderedPair> usedMoves) {
+  public void printMoves(ArrayList<OrderedPair> usedMoves, int boardSize) {
+    ArrayList<OrderedPair> newUsedMoves = usedMoves;
+    int[][] board = new int[newUsedMoves.size()][newUsedMoves.size()];
+    int counter = 1;
     for (OrderedPair move : usedMoves) {
-      System.out.println("(" + move.getX() + "," + move.getY() + ")" + "  ");
+      board[move.getX()][move.getY()] = counter;
+      counter++;
+    }
+    for (int i = 0; i <= boardSize; i++) {
+      for (int j = 0; j <= boardSize; j++) {
+        System.out.print(board[j][i] + " ");
+      }
+      System.out.println("");
     }
   }
 }

@@ -19,7 +19,6 @@ public class Infix {
     eq = eq.replaceAll("[)](?=\\d)", ")*");
     eq = eq.replaceAll("(?<=\\d)[(]", "*(");
     eq = eq.replaceAll("\\)\\(", ")*(");
-    System.out.println(eq);
     String[] newEq = eq.split("(?<=[-+*/()])|(?=[-+*/()])");
     String[] postfixEq = new String[newEq.length * 2];
     String operand = "[0-9]";
