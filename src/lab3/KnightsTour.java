@@ -20,20 +20,19 @@ public class KnightsTour {
     move(first, board, usedMoves, boardSize);
   }
 
-  public void move(OrderedPair current, ArrayList<OrderedPair> board,
-      ArrayList<OrderedPair> usedMoves, int boardSize) {
-    ArrayList<OrderedPair> legalMoves = getLegalMoves(current, board);
-    if (board.isEmpty()) {
-      System.out.println("Solution found!:");
-      printMoves(usedMoves, boardSize);
-    } else if (!legalMoves.isEmpty()) {
+  public void move(OrderedPair current, ArrayList<OrderedPair> newBoard,
+      ArrayList<OrderedPair> newUsedMoves, int boardSize) {
+    ArrayList<OrderedPair> legalMoves = getLegalMoves(current, newBoard);
+    if (newBoard.isEmpty()) {
+      printMoves(newUsedMoves, boardSize);
+    } else {
       for (OrderedPair newMove : legalMoves) {
+        ArrayList<OrderedPair> board = newBoard;
+        ArrayList<OrderedPair> usedMoves = newUsedMoves;
         board.remove(newMove);
         usedMoves.add(newMove);
         move(newMove, board, usedMoves, boardSize);
       }
-    } else {
-      System.out.println("No Solution.");
     }
   }
 
@@ -88,25 +87,30 @@ public class KnightsTour {
   }
 
   public void printMoves(ArrayList<OrderedPair> usedMoves, int boardSize) {
-    int exp = 1;
-    int size = boardSize * boardSize;
-    while (size / 10 > 0) {
-      size /= 10;
-      exp++;
-    }
-    ArrayList<OrderedPair> newUsedMoves = usedMoves;
-    int[][] board = new int[newUsedMoves.size()][newUsedMoves.size()];
-    int counter = 1;
-    for (OrderedPair move : usedMoves) {
-      board[move.getX()][move.getY()] = counter;
-      counter++;
-    }
-    for (int i = 0; i < boardSize; i++) {
-      for (int j = 0; j < boardSize; j++) {
-        System.out.printf("%" + exp + "d", board[j][i]);
-        System.out.print(" | ");
+    if (usedMoves.size() != (boardSize*boardSize)) {
+      System.out.println("No Solution Found.");
+    } else {
+      int exp = 1;
+      int size = boardSize * boardSize;
+      while (size / 10 > 0) {
+        size /= 10;
+        exp++;
       }
-      System.out.println("");
+      System.out.println("Solution Found!");
+      ArrayList<OrderedPair> newUsedMoves = usedMoves;
+      int[][] board = new int[newUsedMoves.size()][newUsedMoves.size()];
+      int counter = 1;
+      for (OrderedPair move : usedMoves) {
+        board[move.getX()][move.getY()] = counter;
+        counter++;
+      }
+      for (int i = 0; i < boardSize; i++) {
+        for (int j = 0; j < boardSize; j++) {
+          System.out.printf("%" + exp + "d", board[j][i]);
+          System.out.print(" | ");
+        }
+        System.out.println("");
+      }
     }
   }
 }
