@@ -10,37 +10,38 @@ import java.util.ArrayList;
  *
  */
 public class KnightsTour {
-  
+
   public KnightsTour(int boardSize, int x, int y) {
     ArrayList<OrderedPair> board = createBoard(boardSize);
     ArrayList<OrderedPair> usedMoves = new ArrayList<OrderedPair>();
-    move(new OrderedPair(x, y), board, usedMoves, boardSize);
+    OrderedPair first = new OrderedPair(x, y);
+    board.remove(first);
+    usedMoves.add(first);
+    move(first, board, usedMoves, boardSize);
   }
 
-  public void move(OrderedPair current, ArrayList<OrderedPair> newBoard,
-      ArrayList<OrderedPair> newUsedMoves, int boardSize) {
-    ArrayList<OrderedPair> board = newBoard;
-    ArrayList<OrderedPair> usedMoves = newUsedMoves;
+  public void move(OrderedPair current, ArrayList<OrderedPair> board,
+      ArrayList<OrderedPair> usedMoves, int boardSize) {
+    ArrayList<OrderedPair> legalMoves = getLegalMoves(current, board);
     if (board.isEmpty()) {
       System.out.println("Solution found!:");
       printMoves(usedMoves, boardSize);
-    } else {
-      ArrayList<OrderedPair> legalMoves = getLegalMoves(current, board);
-      if (!legalMoves.isEmpty()) {
-        for (OrderedPair newMove : legalMoves) {
-          board.remove(newMove);
-          usedMoves.add(newMove);
-          move(newMove, board, usedMoves, boardSize);
-        }
+    } else if (!legalMoves.isEmpty()) {
+      for (OrderedPair newMove : legalMoves) {
+        board.remove(newMove);
+        usedMoves.add(newMove);
+        move(newMove, board, usedMoves, boardSize);
       }
+    } else {
+      System.out.println("No Solution.");
     }
   }
 
 
   public ArrayList<OrderedPair> createBoard(int boardSize) {
     ArrayList<OrderedPair> board = new ArrayList<OrderedPair>();
-    for (int i = 0; i <= boardSize; i++) {
-      for (int j = 0; j <= boardSize; j++) {
+    for (int i = 0; i < boardSize; i++) {
+      for (int j = 0; j < boardSize; j++) {
         board.add(new OrderedPair(i, j));
       }
     }
@@ -87,6 +88,12 @@ public class KnightsTour {
   }
 
   public void printMoves(ArrayList<OrderedPair> usedMoves, int boardSize) {
+    int exp = 1;
+    int size = boardSize * boardSize;
+    while (size / 10 > 0) {
+      size /= 10;
+      exp++;
+    }
     ArrayList<OrderedPair> newUsedMoves = usedMoves;
     int[][] board = new int[newUsedMoves.size()][newUsedMoves.size()];
     int counter = 1;
@@ -94,9 +101,10 @@ public class KnightsTour {
       board[move.getX()][move.getY()] = counter;
       counter++;
     }
-    for (int i = 0; i <= boardSize; i++) {
-      for (int j = 0; j <= boardSize; j++) {
-        System.out.print(board[j][i] + " ");
+    for (int i = 0; i < boardSize; i++) {
+      for (int j = 0; j < boardSize; j++) {
+        System.out.printf("%" + exp + "d", board[j][i]);
+        System.out.print(" | ");
       }
       System.out.println("");
     }
