@@ -13,11 +13,13 @@ public class KnightsTour {
     public ArrayList<OrderedPair> board;
     public ArrayList<OrderedPair> usedMoves;
     public int boardSize;
+    public int path;
 
     public KnightsTour(int boardSize, int x, int y) {
         this.boardSize = boardSize;
-        board = createBoard();
+        createBoard();
         usedMoves = new ArrayList<OrderedPair>();
+        path = 0;
         OrderedPair first = new OrderedPair(x, y);
         if (move(first)) {
             printMoves();
@@ -27,67 +29,46 @@ public class KnightsTour {
     }
 
     public boolean move(OrderedPair current) {
-        if (board.isEmpty()) {
-            System.out.println("Solve");
-            return true;
-        }
-        System.out.println("First Move");
-        board.remove(current);
+        
+board.remove(current);
         usedMoves.add(current);
-        OrderedPair testPair = new OrderedPair(current.getX() + 1, current.getY() + 2);
-        if (board.contains(testPair) && move(testPair)) {
-            System.out.println("Move");
+        if (board.isEmpty()) {
             return true;
         }
-        testPair = new OrderedPair(current.getX() + 2, current.getY() + 1);
-        if (board.contains(testPair) && move(testPair)) {
-            System.out.println("Move");
+        if (board.contains(new OrderedPair(current.getX() + 1, current.getY() + 2)) && move(new OrderedPair(current.getX() + 1, current.getY() + 2))) {
+            return true;
+        } else if (board.contains(new OrderedPair(current.getX() + 2, current.getY() + 1)) && move(new OrderedPair(current.getX() + 2, current.getY() + 1))) { 
+            return true;
+        }else if (board.contains(new OrderedPair(current.getX() + 1, current.getY() - 2)) && move(new OrderedPair(current.getX() + 1, current.getY() - 2))) {
+            return true;
+        }else if (board.contains(new OrderedPair(current.getX() + 2, current.getY() - 1)) && move(new OrderedPair(current.getX() + 2, current.getY() - 1))) {
+            return true;
+        } else if (board.contains(new OrderedPair(current.getX() - 1, current.getY() + 2)) && move(new OrderedPair(current.getX() - 1, current.getY() + 2))) {
+            return true;
+        }else if (board.contains(new OrderedPair(current.getX() - 2, current.getY() + 1)) && move(new OrderedPair(current.getX() - 2, current.getY() + 1))) {
+            return true;
+        }else if (board.contains(new OrderedPair(current.getX() - 1, current.getY() - 2)) && move(new OrderedPair(current.getX() - 1, current.getY() - 2))) {
+            return true;
+        }else if (board.contains(new OrderedPair(current.getX() - 2, current.getY() - 1)) && move(new OrderedPair(current.getX() - 2, current.getY() - 1))) {
+
             return true;
         }
-        testPair = new OrderedPair(current.getX() + 1, current.getY() - 2);
-        if (board.contains(testPair) && move(testPair)) {
-            System.out.println("Move");
-            return true;
-        }
-        testPair = new OrderedPair(current.getX() + 2, current.getY() - 1);
-        if (board.contains(testPair) && move(testPair)) {
-            System.out.println("Move");
-            return true;
-        }
-        testPair = new OrderedPair(current.getX() - 1, current.getY() + 2);
-        if (board.contains(testPair) && move(testPair)) {
-            System.out.println("Move");
-            return true;
-        }
-        testPair = new OrderedPair(current.getX() - 2, current.getY() + 1);
-        if (board.contains(testPair) && move(testPair)) {
-            System.out.println("Move");
-            return true;
-        }
-        testPair = new OrderedPair(current.getX() - 1, current.getY() - 2);
-        if (board.contains(testPair) && move(testPair)) {
-            System.out.println("Move");
-            return true;
-        }
-        testPair = new OrderedPair(current.getX() - 2, current.getY() - 1);
-        if (board.contains(testPair) && move(testPair)) {
-            System.out.println("Move");
-            return true;
-        }
-        System.out.println("Reverse Move");
         board.add(current);
         usedMoves.remove(current);
         return false;
     }
 
-    public ArrayList<OrderedPair> createBoard() {
-        ArrayList<OrderedPair> board = new ArrayList<OrderedPair>();
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                board.add(new OrderedPair(i, j));
+    public void createBoard() {
+        if (boardSize <= 0) {
+            System.out.print("Invalid board size.");
+        } else {
+            board = new ArrayList<OrderedPair>();
+            for (int i = 0; i < boardSize; i++) {
+                for (int j = 0; j < boardSize; j++) {
+                    board.add(new OrderedPair(i, j));
+                }
             }
         }
-        return board;
     }
 
     public void printMoves() {
