@@ -4,7 +4,11 @@
 package lab3;
 
 /**
- * @author FletcherG
+ * Calculator that takes a user inputted Infix equation
+ * and determines the final answer, if there is one
+ * 
+ * @author Greg Fletcher
+ * @author Sean O'Donnell
  *
  */
 public class Infix {
@@ -13,6 +17,14 @@ public class Infix {
 
   }
 
+	/**
+	 * Parses through the input given by the user
+	 * in Infix form and evaluates the expresiion to find
+	 * it in Postfix form
+	 * 
+	 * @param String equation inputted
+	 * @return String postfix version of equation
+	 */
   public static String infixToPostfix(String eq) {
     MyLinkedList<String> stack = new MyLinkedList<String>();
     int parenBalance = 0;
@@ -98,6 +110,12 @@ public class Infix {
     return eqString.toString();
   }
 
+	/**
+	 * Evaluates the equation that is now in Postfix form
+	 * 
+	 * @param String equation in Postfix form
+	 * @return int final answer
+	 */
   public static int evaluate(String eq) {
     return Postfix.evaluate(infixToPostfix(eq));
   }

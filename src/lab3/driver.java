@@ -4,7 +4,8 @@
 package lab3;
 
 /**
- * @author FletcherG
+ * @author Greg Fletcher
+ * @author Sean O'Donnell
  *
  */
 public class driver {
