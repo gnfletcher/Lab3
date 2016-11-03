@@ -106,7 +106,9 @@ public class Infix {
         eqString.append(s);
       }
     }
-    System.out.println(eqString.toString());
+    //Uncomment to show postfix version of equation.
+    //System.out.print("Postfix version  ");
+    //System.out.println(eqString.toString());
     return eqString.toString();
   }
 

@@ -4,8 +4,8 @@
 package lab3;
 
 /**
- * Calculator that takes a user inputted Postfix equation
- * and determines the final answer, if there is one
+ * Calculator that takes a user inputted Postfix equation and determines the final answer, if there
+ * is one.
  * 
  * @author Greg Fletcher
  * @Author Sean O'Donnell
@@ -13,22 +13,21 @@ package lab3;
  */
 public class Postfix {
 
-	/**
-	 * a blank constructor that simply creates a new instance of Postfix
-	 * 
-	 */
+  /**
+   * a blank constructor that simply creates a new instance of Postfix
+   * 
+   */
   public Postfix() {
 
   }
 
-	/**
-	 * Parses through the input given by the user
-	 * in Postfix form and evaluates the expresiion to find
-	 * an answer
-	 * 
-	 * @param String equation inputted
-	 * @return int final answer
-	 */
+  /**
+   * Parses through the input given by the user in Postfix form and evaluates the expresiion to find
+   * an answer
+   * 
+   * @param String equation inputted
+   * @return int final answer
+   */
   public static int evaluate(String eq) {
     MyLinkedList<String> stack = new MyLinkedList<String>();
     String[] newEq = eq.split("\\s");

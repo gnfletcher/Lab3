@@ -11,62 +11,49 @@ package lab3;
  *
  */
 public class OrderedPair {
-  
+
   public int x;
   public int y;
-  
-	/**
-	 * Constructor takes ints x and y that serve as x and y coordinates and
-	 * creates a new Ordered Pair
-	 * 
-	 * @param int x coordinate
-	 * @param int y coordinate
-	 *            
-	 * 
-	 */
-  public OrderedPair(int x, int y){
+
+  /**
+   * Constructor takes ints x and y that serve as x and y coordinates and creates a new Ordered Pair
+   * 
+   * @param int x coordinate
+   * @param int y coordinate
+   * 
+   * 
+   */
+  public OrderedPair(int x, int y) {
     this.x = x;
     this.y = y;
   }
-  
-	/**
-	 * Retrieves the current x coordinate
-	 * 
-	 * @return int x coordinate
-	 */
-  public int getX(){
+
+  /**
+   * Retrieves the current x coordinate
+   * 
+   * @return int x coordinate
+   */
+  public int getX() {
     return this.x;
   }
-  
-	/**
-	 * Retrieves the current y coordinate
-	 * 
-	 * @return int y coordinate
-	 */
-  public int getY(){
+
+  /**
+   * Retrieves the current y coordinate
+   * 
+   * @return int y coordinate
+   */
+  public int getY() {
     return this.y;
   }
-  
-	/**
-	 * Retrieves the current Ordered Pair
-	 * 
-	 * @return int[] Ordered Pair
-	 */
-  public int[] getPair(){
-    int[] pair = new int[2];
-    pair[0] = x;
-    pair[1] = y;
-    return pair;
-  }
-  
-	/**
-	 * Compares the current Ordered Pair to another Ordered Pair
-	 * and tests if they are equal
-	 * 
-	 * @param Object Ordered Pair to be compared
-	 * @return boolean whether or not they are equal
-	 */
-  public boolean equals(Object o){
+
+
+  /**
+   * Compares the current Ordered Pair to another Ordered Pair and tests if they are equal
+   * 
+   * @param Object Ordered Pair to be compared
+   * @return boolean whether or not they are equal
+   */
+  public boolean equals(Object o) {
     if (!(o instanceof OrderedPair)) {
       return false;
     }
